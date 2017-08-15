@@ -936,6 +936,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#facebookAuth">
         <developer_s-social-network:builtForSolution rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#appFacebook"/>
+        <developer_s-social-network:isDevelopedBy rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#facebookInc"/>
         <developer_s-social-network:needsSkill rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#authentication"/>
     </owl:NamedIndividual>
     

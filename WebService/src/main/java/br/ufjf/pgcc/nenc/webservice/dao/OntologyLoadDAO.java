@@ -25,6 +25,7 @@ public class OntologyLoadDAO {
 
 // read the RDF/XML file
         model.read(input, null);
+        model.setNsPrefix("onto", "http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#");
         return model;
     }
 
