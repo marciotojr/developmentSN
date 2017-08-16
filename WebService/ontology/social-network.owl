@@ -228,7 +228,7 @@
         <rdfs:range rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#Skill"/>
         <owl:propertyChainAxiom rdf:parseType="Collection">
             <rdf:Description rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#hasRole"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#hasSkill"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#needsSkill"/>
         </owl:propertyChainAxiom>
     </owl:ObjectProperty>
     
@@ -498,6 +498,27 @@
         <rdfs:domain rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#Person"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#Person"/>
     </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#hasId -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#hasId">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
     
 
 
@@ -837,6 +858,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#android">
         <rdf:type rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#Platform"/>
         <developer_s-social-network:needsSkill rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#javaDevelopment"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 
@@ -846,6 +868,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#androidEcosystem">
         <developer_s-social-network:hasNetwork rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#androidNetwork"/>
         <developer_s-social-network:hasPlatform rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#android"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 
@@ -854,6 +877,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#androidNetwork">
         <rdf:type rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#SocialNetwork"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 
@@ -863,6 +887,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#androidRepo">
         <rdf:type rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#Repository"/>
         <developer_s-social-network:hosts rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#android"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 
@@ -872,6 +897,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#appFacebook">
         <rdf:type rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#Solution"/>
         <developer_s-social-network:builtForPlatform rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#android"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 
@@ -880,6 +906,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#appInstagram">
         <developer_s-social-network:builtForPlatform rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#android"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 
@@ -888,6 +915,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#authentication">
         <rdf:type rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#Skill"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 
@@ -900,6 +928,7 @@
         <developer_s-social-network:hasRole rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#securityManager"/>
         <developer_s-social-network:postsA rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#doubtsOnJava"/>
         <developer_s-social-network:worksAt rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#google"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 
@@ -909,6 +938,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#developerB">
         <rdf:type rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#Person"/>
         <developer_s-social-network:develops rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#android"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 
@@ -919,6 +949,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#Person"/>
         <developer_s-social-network:follows rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#androidRepo"/>
         <developer_s-social-network:hasSkill rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#authentication"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 
@@ -928,6 +959,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#doubtsOnJava">
         <rdf:type rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#Post"/>
         <developer_s-social-network:isPostedOn rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#forumJava"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">11</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 
@@ -938,6 +970,7 @@
         <developer_s-social-network:builtForSolution rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#appFacebook"/>
         <developer_s-social-network:isDevelopedBy rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#facebookInc"/>
         <developer_s-social-network:needsSkill rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#authentication"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 
@@ -948,6 +981,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#Company"/>
         <developer_s-social-network:develops rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#appFacebook"/>
         <developer_s-social-network:develops rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#appInstagram"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">13</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 
@@ -956,6 +990,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#facecebookAuthRepo">
         <developer_s-social-network:hosts rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#facebookAuth"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">14</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 
@@ -965,6 +1000,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#forumJava">
         <rdf:type rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#Forum"/>
         <developer_s-social-network:isAboutSkill rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#javaDevelopment"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">15</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 
@@ -974,6 +1010,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#google">
         <rdf:type rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#Company"/>
         <developer_s-social-network:develops rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#android"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 
@@ -982,6 +1019,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#javaDevelopment">
         <rdf:type rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#Skill"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">17</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 
@@ -991,6 +1029,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#securityManager">
         <developer_s-social-network:needsSkill rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#authentication"/>
         <developer_s-social-network:needsSkill rdf:resource="http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#javaDevelopment"/>
+        <developer_s-social-network:hasId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">18</developer_s-social-network:hasId>
     </owl:NamedIndividual>
     
 

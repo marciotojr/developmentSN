@@ -26,34 +26,9 @@ import org.apache.jena.rdf.model.Resource;
  * @author Marcio Júnior
  */
 public class GetInterest {
-    
-    public String execute(){
-        return getInterest().toString();
-    }
 
-    public static Model getInterest() {
+    public String getInterest(int userId) {
         Model model = OntologyLoadDAO.read();
-        /* StmtIterator iter = model.listStatements();
-        model.setNsPrefix("http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#", "onto");
-        /*while (iter.hasNext()) {
-            Statement stmt = iter.nextStatement();  // get next statement
-            Resource subject = stmt.getSubject();     // get the subject
-            Property predicate = stmt.getPredicate();   // get the predicate
-            RDFNode object = stmt.getObject();      // get the object
-
-            System.out.print(subject.toString());
-            System.out.print(" " + predicate.toString() + " ");
-            if (object instanceof Resource) {
-                System.out.print(object.toString());
-            } else {
-                // object is a literal
-                System.out.print(" \"" + object.toString() + "\"");
-            }
-
-            System.out.println(" .");
-
-            System.err.println("");
-        }*/
         String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
                 + "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n"
                 + "PREFIX xml: <http://www.w3.org/XML/1998/namespace>\n"
@@ -71,18 +46,15 @@ public class GetInterest {
                 + "	?repo onto:requiresSkill ?skill}}";
 
         Dataset dataset = DatasetFactory.create(model);
-        // Fazendo o parse da string da consulta e criando o objecto Query
+
         Query consulta = QueryFactory.create(query);
-        // Executando a consulta e obtendo o resultado
+
         QueryExecution qexec = QueryExecutionFactory.create(consulta, dataset);
         ResultSet resultado = qexec.execSelect();
-        // Imprimindo os resultados
         ArrayList<Person> people = new ArrayList<>();
         Person person = null;
         Skill skill = null;
         while (resultado.hasNext()) {
-            // Cada linha contém dois campos: "casado" e "conjuge", assim foi definido na string da consulta
-            System.err.println("\n");
             QuerySolution linha = (QuerySolution) resultado.next();
             if (person == null) {
                 person = new Person(linha.get("person"));
@@ -102,10 +74,10 @@ public class GetInterest {
                 np.addProperty(model.getProperty("http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#hasInterestIn"), s.getSelf());
             }
         }
-        return newModel;
+        return newModel.toString();
     }
-    
-    
+    /*
+   
     public static Person[] getInterestArr() {
         Model model = OntologyLoadDAO.read();
         /* StmtIterator iter = model.listStatements();
@@ -128,7 +100,7 @@ public class GetInterest {
             System.out.println(" .");
 
             System.err.println("");
-        }*/
+        }
         String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
                 + "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n"
                 + "PREFIX xml: <http://www.w3.org/XML/1998/namespace>\n"
@@ -178,5 +150,5 @@ public class GetInterest {
             }
         }
         return (Person[])people.toArray();
-    }
+    }*/
 }

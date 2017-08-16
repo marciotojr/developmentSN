@@ -17,7 +17,7 @@ public class OntologyLoadDAO {
 
     public static Model read() {
         Model model = ModelFactory.createDefaultModel();
-        InputStream input = FileManager.get().open("ontology\\social-network.owl");
+        InputStream input = FileManager.get().open("WEB-INF\\social-network.owl");
         if (input == null) {
             throw new IllegalArgumentException(
                     "File: " + "ontology\\social-network.owl" + " not found");
