@@ -6,6 +6,7 @@
 package br.ufjf.pgcc.nenc.webservice;
 
 import br.ufjf.pgcc.nenc.webservice.controller.GetInterest;
+import javax.json.JsonValue;
 
 /**
  *
@@ -15,7 +16,7 @@ public class Main {
 
     public static void main(String args[]) {
         GetInterest gi = new GetInterest();
-        String model = gi.getInterest(8);
+        String model = gi.getUsersInterests(8);
         System.out.println(model);
     }
 }

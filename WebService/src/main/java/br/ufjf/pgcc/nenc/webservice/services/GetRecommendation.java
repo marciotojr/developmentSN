@@ -37,20 +37,23 @@ public class GetRecommendation {
     }
 
     /**
-     * Retrieves representation of an instance of br.ufjf.pgcc.nenc.webservice.services.GetRecommendation
+     * Retrieves representation of an instance of
+     * br.ufjf.pgcc.nenc.webservice.services.GetRecommendation
+     *
      * @return an instance of java.lang.String
      */
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/getInterests/{userId}")
     public String getJson(@PathParam("userId") int userId) throws MalformedURLException, UnsupportedEncodingException, IOException {
-    // public String getJson(){
-    GetInterest gi = new GetInterest();
-        return gi.getInterest(userId);
+        GetInterest gi = new GetInterest();
+        String returnValue = gi.getUsersInterests(userId);
+        return returnValue;
     }
 
     /**
      * PUT method for updating or creating an instance of GetRecommendation
+     *
      * @param content representation for the resource
      */
     @PUT

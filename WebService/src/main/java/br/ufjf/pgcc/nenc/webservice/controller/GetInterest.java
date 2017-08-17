@@ -9,6 +9,9 @@ import br.ufjf.pgcc.nenc.webservice.dao.OntologyLoadDAO;
 import br.ufjf.pgcc.nenc.webservice.model.Person;
 import br.ufjf.pgcc.nenc.webservice.model.Skill;
 import java.util.ArrayList;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import org.apache.jena.query.Dataset;
 import org.apache.jena.query.DatasetFactory;
 import org.apache.jena.query.Query;
@@ -18,8 +21,9 @@ import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Resource;
+import javax.json.JsonValue;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -27,128 +31,76 @@ import org.apache.jena.rdf.model.Resource;
  */
 public class GetInterest {
 
-    public String getInterest(int userId) {
-        Model model = OntologyLoadDAO.read();
-        String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
-                + "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n"
-                + "PREFIX xml: <http://www.w3.org/XML/1998/namespace>\n"
-                + "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
-                + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
-                + "PREFIX onto: <http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#>\n"
-                + "\n"
-                + "SELECT DISTINCT ?person ?skill\n"
-                + "WHERE {{\n"
-                + "	?person onto:postsA ?post.\n"
-                + "	?post onto:isPostedOn ?space.\n"
-                + "	?space onto:isAboutSkill ?skill} \n"
-                + "	UNION{\n"
-                + "	?person onto:follows ?repo.\n"
-                + "	?repo onto:requiresSkill ?skill}}";
-
-        Dataset dataset = DatasetFactory.create(model);
-
-        Query consulta = QueryFactory.create(query);
-
-        QueryExecution qexec = QueryExecutionFactory.create(consulta, dataset);
-        ResultSet resultado = qexec.execSelect();
-        ArrayList<Person> people = new ArrayList<>();
-        Person person = null;
-        Skill skill = null;
-        while (resultado.hasNext()) {
-            QuerySolution linha = (QuerySolution) resultado.next();
-            if (person == null) {
-                person = new Person(linha.get("person"));
-            } else if (!person.getSelf().equals(linha.get("person"))) {
-                people.add(person);
-                person = new Person(linha.get("person"));
-            }
-            skill = new Skill(linha.get("skill"));
-            person.addInterest(skill);
-        }
-        people.add(person);
-        Model newModel = ModelFactory.createDefaultModel();
-        newModel.setNsPrefix("onto", "http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#");
-        for (Person p : people) {
-            Resource np = newModel.createResource(p.getSelf().asResource());
-            for (Skill s : p.getInterest()) {
-                np.addProperty(model.getProperty("http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#hasInterestIn"), s.getSelf());
-            }
-        }
-        return newModel.toString();
+    public GetInterest() {
     }
-    /*
-   
-    public static Person[] getInterestArr() {
-        Model model = OntologyLoadDAO.read();
-        /* StmtIterator iter = model.listStatements();
-        model.setNsPrefix("http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#", "onto");
-        /*while (iter.hasNext()) {
-            Statement stmt = iter.nextStatement();  // get next statement
-            Resource subject = stmt.getSubject();     // get the subject
-            Property predicate = stmt.getPredicate();   // get the predicate
-            RDFNode object = stmt.getObject();      // get the object
 
-            System.out.print(subject.toString());
-            System.out.print(" " + predicate.toString() + " ");
-            if (object instanceof Resource) {
-                System.out.print(object.toString());
-            } else {
-                // object is a literal
-                System.out.print(" \"" + object.toString() + "\"");
-            }
-
-            System.out.println(" .");
-
-            System.err.println("");
-        }
+    public String getUsersInterests(int userId) {
+        OntologyLoadDAO odao = new OntologyLoadDAO();
+        Model model = odao.read();
         String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
-                + "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n"
-                + "PREFIX xml: <http://www.w3.org/XML/1998/namespace>\n"
-                + "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
-                + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
-                + "PREFIX onto: <http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#>\n"
-                + "\n"
-                + "SELECT DISTINCT ?person ?skill\n"
-                + "WHERE {{\n"
-                + "	?person onto:postsA ?post.\n"
-                + "	?post onto:isPostedOn ?space.\n"
-                + "	?space onto:isAboutSkill ?skill} \n"
-                + "	UNION{\n"
-                + "	?person onto:follows ?repo.\n"
-                + "	?repo onto:requiresSkill ?skill}}";
+                + "                 PREFIX owl: <http://www.w3.org/2002/07/owl#>\n"
+                + "                 PREFIX xml: <http://www.w3.org/XML/1998/namespace>\n"
+                + "                 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
+                + "                 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+                + "                 PREFIX onto: <http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#>\n"
+                + "                 \n"
+                + "                 SELECT DISTINCT *\n"
+                + "                 WHERE {{\n"
+                + "                 ?person onto:hasId '" + userId + "'^^xsd:integer.\n"
+                + "                 	?person onto:postsA ?post.\n"
+                + "                 	?post onto:isPostedOn ?space.\n"
+                + "                 	?space onto:isAboutSkill ?skill} \n"
+                + "                 	UNION{\n"
+                + "                 	?person onto:hasId '" + userId + "'^^xsd:integer.\n"
+                + "                 	?person onto:follows ?repo.\n"
+                + "                 	?repo onto:requiresSkill ?skill}\n"
+                + "                 	UNION{\n"
+                + "                 	?person onto:hasId '" + userId + "'^^xsd:integer.\n"
+                + "                 	?person onto:follows ?repo.\n"
+                + "                 	?repo onto:hosts ?software.\n"
+                + "                 	?software onto:needsSkill ?skill}}";
 
         Dataset dataset = DatasetFactory.create(model);
-        // Fazendo o parse da string da consulta e criando o objecto Query
+
         Query consulta = QueryFactory.create(query);
-        // Executando a consulta e obtendo o resultado
+
         QueryExecution qexec = QueryExecutionFactory.create(consulta, dataset);
         ResultSet resultado = qexec.execSelect();
-        // Imprimindo os resultados
         ArrayList<Person> people = new ArrayList<>();
         Person person = null;
         Skill skill = null;
+        if (!resultado.hasNext()) {
+            return "[]";
+        }
         while (resultado.hasNext()) {
-            // Cada linha contém dois campos: "casado" e "conjuge", assim foi definido na string da consulta
-            System.err.println("\n");
-            QuerySolution linha = (QuerySolution) resultado.next();
+            QuerySolution tuple = (QuerySolution) resultado.next();
             if (person == null) {
-                person = new Person(linha.get("person"));
-            } else if (!person.getSelf().equals(linha.get("person"))) {
+                person = new Person(tuple.get("person"));
+            } else if (!person.getSelf().equals(tuple.get("person"))) {
                 people.add(person);
-                person = new Person(linha.get("person"));
+                person = new Person(tuple.get("person"));
             }
-            skill = new Skill(linha.get("skill"));
+            skill = new Skill(tuple.get("skill"));
             person.addInterest(skill);
         }
         people.add(person);
-        Model newModel = ModelFactory.createDefaultModel();
-        newModel.setNsPrefix("onto", "http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#");
+        JSONObject obj = new JSONObject();
+
+        JSONArray jPeople = new JSONArray();
+
         for (Person p : people) {
-            Resource np = newModel.createResource(p.getSelf().asResource());
+            JSONObject jPerson = new JSONObject();
+            jPerson.put("Person", p.getSelf().toString());
+            JSONArray jInterests = new JSONArray();
             for (Skill s : p.getInterest()) {
-                np.addProperty(model.getProperty("http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#hasInterestIn"), s.getSelf());
+                JSONObject jSkill = new JSONObject();
+                jSkill.put("Skill", s.getSelf().toString());
+                jInterests.put(jSkill);
             }
+            jPerson.put("Interests", jInterests);
+            jPeople.put(jPerson);
         }
-        return (Person[])people.toArray();
-    }*/
+
+        return jPeople.toString();
+    }
 }

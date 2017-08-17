@@ -1,0 +1,59 @@
+• Um web service para verificar quais pessoas estão aptas parar trabalharem em determinadas funções, e caso não haja alguém apto, quais pessoas preenchem as habilidades parcialmente, e demonstrem interesse pelas demais habilidades que faltam para a função. Caso a pessoa não tenha todas as habilidades necessárias, são retornadas também as funções que faltam;
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xml: <http://www.w3.org/XML/1998/namespace>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX onto: <http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#>
+
+--------------HAS SKILL
+
+SELECT DISTINCT *
+WHERE{{	?role onto:needsSkill ?skill.
+	OPTIONAL{?person onto:hasSkill ?skill}.
+	?role rdf:type onto:Role
+	}}
+ORDER BY ASC(?person) ASC(?role) 
+
+------------------------------------
+	
+• Gerar uma lista de possíveis interesses dos atores para uso de um serviço para recomendar assuntos sobre aqueles tópicos;
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xml: <http://www.w3.org/XML/1998/namespace>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX onto: <http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#>
+
+SELECT DISTINCT *
+WHERE {{{
+	?person onto:postsOn ?space.
+	?space onto:isAboutSkill ?skill} 
+	UNION{
+	?person onto:follows ?repo.
+	?repo onto:requiresSkill ?skill}}.
+	?person rdf:type onto:Person}
+ORDER BY ?person ?skill
+	
+	
+	
+• Mapear as instituições que contribuem direta ou indiretamente para o ecossistema.	
+	
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xml: <http://www.w3.org/XML/1998/namespace>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX onto: <http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#>
+
+SELECT DISTINCT ?institution
+WHERE {{
+	?institution onto:develops ?solution.
+	?solution onto:builtForPlatform ?platform.
+	?platform onto:hasEcosystem onto:androidEcosystem  } 
+	UNION  {
+	?institution onto:develops ?component.
+	?component onto:builtForSolution ?solution.
+	?solution onto:builtForPlatform ?platform.
+	?platform onto:hasEcosystem onto:androidEcosystem}}

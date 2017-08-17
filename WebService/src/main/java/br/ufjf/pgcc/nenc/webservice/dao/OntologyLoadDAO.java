@@ -5,9 +5,11 @@
  */
 package br.ufjf.pgcc.nenc.webservice.dao;
 
+import static com.sun.xml.ws.security.trust.WSTrustElementFactory.getContext;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.util.FileManager;
 import java.io.*;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -15,12 +17,12 @@ import java.io.*;
  */
 public class OntologyLoadDAO {
 
-    public static Model read() {
+    public Model read() {
         Model model = ModelFactory.createDefaultModel();
-        InputStream input = FileManager.get().open("WEB-INF\\social-network.owl");
+        InputStream input = FileManager.get().open("C:\\\\social-network.owl");
         if (input == null) {
             throw new IllegalArgumentException(
-                    "File: " + "ontology\\social-network.owl" + " not found");
+                    "File: " + "social-network.owl" + " not found");
         }
 
 // read the RDF/XML file
