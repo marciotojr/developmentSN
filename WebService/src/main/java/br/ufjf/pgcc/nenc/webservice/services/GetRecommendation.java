@@ -6,6 +6,7 @@
 package br.ufjf.pgcc.nenc.webservice.services;
 
 import br.ufjf.pgcc.nenc.webservice.controller.GetInterest;
+import br.ufjf.pgcc.nenc.webservice.controller.GetIntitutionsInEcosystem;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -51,6 +52,13 @@ public class GetRecommendation {
         return returnValue;
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/getInstitutions/")
+    public String getJson()throws MalformedURLException, UnsupportedEncodingException, IOException {
+        GetIntitutionsInEcosystem gi = new GetIntitutionsInEcosystem();
+        return gi.getInstitutions();
+    }
     /**
      * PUT method for updating or creating an instance of GetRecommendation
      *

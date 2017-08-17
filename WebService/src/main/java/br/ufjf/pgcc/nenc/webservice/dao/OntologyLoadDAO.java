@@ -10,6 +10,8 @@ import org.apache.jena.rdf.model.*;
 import org.apache.jena.util.FileManager;
 import java.io.*;
 import javax.servlet.ServletContext;
+import org.apache.jena.reasoner.Reasoner;
+import org.apache.jena.reasoner.ReasonerRegistry;
 
 /**
  *
@@ -17,18 +19,27 @@ import javax.servlet.ServletContext;
  */
 public class OntologyLoadDAO {
 
-    public Model read() {
-        Model model = ModelFactory.createDefaultModel();
-        InputStream input = FileManager.get().open("C:\\\\social-network.owl");
-        if (input == null) {
-            throw new IllegalArgumentException(
-                    "File: " + "social-network.owl" + " not found");
-        }
+    private static Model instance;
 
-// read the RDF/XML file
-        model.read(input, null);
-        model.setNsPrefix("onto", "http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#");
-        return model;
+    private OntologyLoadDAO(){
+        
+    }
+    
+    public static Model getInstance() {
+        if (instance == null) {
+            Model baseModel = ModelFactory.createDefaultModel();
+            Reasoner resoner = ReasonerRegistry.getOWLReasoner();
+            //Model model = ModelFactory.createDefaultModel();
+            InputStream input = FileManager.get().open("C:\\\\social-network.owl");
+            if (input == null) {
+                throw new IllegalArgumentException(
+                        "File: " + "social-network.owl" + " not found");
+            }
+
+            baseModel.read(input, null);
+            instance = ModelFactory.createInfModel(resoner, baseModel);
+        }
+        return instance;
     }
 
 }

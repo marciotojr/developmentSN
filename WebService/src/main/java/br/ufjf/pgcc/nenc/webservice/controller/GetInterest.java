@@ -35,8 +35,7 @@ public class GetInterest {
     }
 
     public String getUsersInterests(int userId) {
-        OntologyLoadDAO odao = new OntologyLoadDAO();
-        Model model = odao.read();
+        Model model = OntologyLoadDAO.getInstance();
         String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
                 + "                 PREFIX owl: <http://www.w3.org/2002/07/owl#>\n"
                 + "                 PREFIX xml: <http://www.w3.org/XML/1998/namespace>\n"
@@ -44,7 +43,7 @@ public class GetInterest {
                 + "                 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
                 + "                 PREFIX onto: <http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#>\n"
                 + "                 \n"
-                + "                 SELECT DISTINCT *\n"
+                + "                 SELECT DISTINCT ?person ?skill\n"
                 + "                 WHERE {{\n"
                 + "                 ?person onto:hasId '" + userId + "'^^xsd:integer.\n"
                 + "                 	?person onto:postsA ?post.\n"
