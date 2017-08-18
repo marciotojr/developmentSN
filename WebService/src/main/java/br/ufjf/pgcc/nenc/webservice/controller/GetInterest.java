@@ -9,9 +9,6 @@ import br.ufjf.pgcc.nenc.webservice.dao.OntologyLoadDAO;
 import br.ufjf.pgcc.nenc.webservice.model.Person;
 import br.ufjf.pgcc.nenc.webservice.model.Skill;
 import java.util.ArrayList;
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObjectBuilder;
 import org.apache.jena.query.Dataset;
 import org.apache.jena.query.DatasetFactory;
 import org.apache.jena.query.Query;
@@ -21,7 +18,6 @@ import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
-import javax.json.JsonValue;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

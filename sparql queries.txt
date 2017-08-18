@@ -1,4 +1,4 @@
-• Um web service para verificar quais pessoas estão aptas parar trabalharem em determinadas funções, e caso não haja alguém apto, quais pessoas preenchem as habilidades parcialmente, e demonstrem interesse pelas demais habilidades que faltam para a função. Caso a pessoa não tenha todas as habilidades necessárias, são retornadas também as funções que faltam;
+﻿• Um web service para verificar quais pessoas estão aptas parar trabalharem em determinadas funções, e caso não haja alguém apto, quais pessoas preenchem as habilidades parcialmente, e demonstrem interesse pelas demais habilidades que faltam para a função. Caso a pessoa não tenha todas as habilidades necessárias, são retornadas também as funções que faltam;
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX xml: <http://www.w3.org/XML/1998/namespace>
@@ -6,10 +6,9 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX onto: <http://www.semanticweb.org/marciojúnior/ontologies/2017/6/developer_s-social-network#>
 
---------------HAS SKILL
-
-SELECT DISTINCT *
-WHERE{{	?role onto:needsSkill ?skill.
+SELECT DISTINCT ?person ?skill
+WHERE{{	?role onto:hasId "18".
+	?role onto:needsSkill ?skill.
 	OPTIONAL{?person onto:hasSkill ?skill}.
 	?role rdf:type onto:Role
 	}}

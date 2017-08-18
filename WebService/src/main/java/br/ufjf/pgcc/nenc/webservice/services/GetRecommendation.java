@@ -7,6 +7,7 @@ package br.ufjf.pgcc.nenc.webservice.services;
 
 import br.ufjf.pgcc.nenc.webservice.controller.GetInterest;
 import br.ufjf.pgcc.nenc.webservice.controller.GetIntitutionsInEcosystem;
+import br.ufjf.pgcc.nenc.webservice.controller.GetRecomendedDevelopers;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -46,10 +47,9 @@ public class GetRecommendation {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/getInterests/{userId}")
-    public String getJson(@PathParam("userId") int userId) throws MalformedURLException, UnsupportedEncodingException, IOException {
+    public String getRecommendationsForUser(@PathParam("userId") int userId) throws MalformedURLException, UnsupportedEncodingException, IOException {
         GetInterest gi = new GetInterest();
-        String returnValue = gi.getUsersInterests(userId);
-        return returnValue;
+        return gi.getUsersInterests(userId);
     }
 
     @GET
@@ -58,6 +58,14 @@ public class GetRecommendation {
     public String getJson()throws MalformedURLException, UnsupportedEncodingException, IOException {
         GetIntitutionsInEcosystem gi = new GetIntitutionsInEcosystem();
         return gi.getInstitutions();
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/getCollaborators/{roleId}")
+    public String getRecommendationsForRole(@PathParam("roleId") int roleId) throws MalformedURLException, UnsupportedEncodingException, IOException {
+        GetRecomendedDevelopers gi = new GetRecomendedDevelopers();
+        return gi.getUsersInterests(roleId);
     }
     /**
      * PUT method for updating or creating an instance of GetRecommendation

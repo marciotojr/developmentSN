@@ -26,5 +26,8 @@ public class Skill {
         this.self = self;
     }
     
+    public String toString(){
+        return self.toString();
+    }
     
 }

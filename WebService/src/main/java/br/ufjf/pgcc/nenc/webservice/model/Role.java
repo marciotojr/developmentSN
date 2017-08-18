@@ -5,18 +5,23 @@
  */
 package br.ufjf.pgcc.nenc.webservice.model;
 
+import java.util.ArrayList;
 import org.apache.jena.rdf.model.RDFNode;
 
 /**
  *
  * @author Marcio Júnior
  */
-public class Institution {
+public class Role {
     RDFNode self;
+    ArrayList<Skill> required;
 
-    public Institution(RDFNode self) {
+    public Role(RDFNode self) {
         this.self = self;
+        required = new ArrayList<>();
     }
+    
+    
 
     public RDFNode getSelf() {
         return self;
@@ -25,9 +30,20 @@ public class Institution {
     public void setSelf(RDFNode self) {
         this.self = self;
     }
+
+    public ArrayList<Skill> getInterest() {
+        return required;
+    }
+
+    public void setInterest(ArrayList<Skill> interest) {
+        this.required = interest;
+    }
+    
+    public void addInterest(Skill interest){
+        this.required.add(interest);
+    }
     
     public String toString(){
         return self.toString();
     }
-    
 }

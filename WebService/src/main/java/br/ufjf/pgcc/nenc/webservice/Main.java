@@ -7,6 +7,7 @@ package br.ufjf.pgcc.nenc.webservice;
 
 import br.ufjf.pgcc.nenc.webservice.controller.GetInterest;
 import br.ufjf.pgcc.nenc.webservice.controller.GetIntitutionsInEcosystem;
+import br.ufjf.pgcc.nenc.webservice.controller.GetRecomendedDevelopers;
 import javax.json.JsonValue;
 
 /**
@@ -16,8 +17,8 @@ import javax.json.JsonValue;
 public class Main {
 
     public static void main(String args[]) {
-        GetIntitutionsInEcosystem gi = new GetIntitutionsInEcosystem();
-        String model = gi.getInstitutions();
-        System.out.println(model);
+        GetRecomendedDevelopers gi = new GetRecomendedDevelopers();
+        String output = gi.getUsersInterests(18);
+        System.err.println(output);
     }
 }

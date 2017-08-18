@@ -5,6 +5,7 @@
  */
 package br.ufjf.pgcc.nenc.webservice.model;
 
+import java.util.ArrayList;
 import org.apache.jena.rdf.model.RDFNode;
 
 /**
@@ -13,11 +14,13 @@ import org.apache.jena.rdf.model.RDFNode;
  */
 public class Person {
     RDFNode self;
-    Skill[] interest;
+    ArrayList<Skill> interest;
+    ArrayList<Skill> known;
 
     public Person(RDFNode self) {
         this.self = self;
-        interest = new Skill[0];
+        interest = new ArrayList<>();
+        known = new ArrayList<>();
     }
     
     
@@ -30,19 +33,31 @@ public class Person {
         this.self = self;
     }
 
-    public Skill[] getInterest() {
+    public ArrayList<Skill> getInterest() {
         return interest;
     }
 
-    public void setInterest(Skill[] interest) {
+    public void setInterest(ArrayList<Skill> interest) {
         this.interest = interest;
     }
     
     public void addInterest(Skill interest){
-        Skill[] aux = this.interest;
-        this.interest = new Skill[aux.length+1];
-        for(int i=0;i<aux.length;i++)this.interest[i]=aux[i];
-        this.interest[aux.length]=interest;
+        this.interest.add(interest);
+    }
+
+    public ArrayList<Skill> getKnown() {
+        return known;
+    }
+
+    public void setKnown(ArrayList<Skill> known) {
+        this.known = known;
     }
     
+    public void addSkill(Skill skill){
+        this.known.add(skill);
+    }
+    
+    public String toString(){
+        return self.toString();
+    }
 }
